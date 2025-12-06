@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+<head>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* Lock to A4 width so PDF is perfect */
+    .sheet {
+      width: 210mm;
+      margin: 0 auto;
+      padding: 12mm 14mm;
+      background: white;
+      box-sizing: border-box;
+    }
+
+    /* Keep each row intact when printing */
+    .case-row {
+      page-break-inside: avoid;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-200">
+
+<div class="sheet font-serif">
+
+  <!-- Header -->
+  <div class="text-center mb-6">
+    <h1 class="text-xl font-bold">MANOJ RAMASWAMY ASSOCIATES</h1>
+    <p class="text-gray-600 text-sm">02.12.2025 · Tuesday</p>
+  </div>
+
+  <!-- Column Header -->
+  <div class="flex bg-blue-900 text-white p-3 rounded font-bold text-sm mb-2">
+    <div class="w-[40px]">Sr.</div>
+    <div class="w-[70px]">Type</div>
+    <div class="w-[110px]">Case No.</div>
+    <div class="w-[70px]">Cat</div>
+    <div class="flex-1">Parties / Bench</div>
+    <div class="w-[100px] text-right">Item</div>
+  </div>
+
+  <!-- CASE ROW (copy for more) -->
+  <div class="case-row flex bg-white p-4 mb-2 border rounded shadow-sm">
+    <div class="w-[40px] text-center font-bold">1.</div>
+
+    <div class="w-[70px] text-gray-700">WP(C)</div>
+
+    <div class="w-[110px] text-gray-700">37412 / 2025</div>
+
+    <div class="w-[70px] text-gray-700">P · 1A</div>
+
+    <div class="flex-1 pr-4">
+      <div class="font-bold">Priyakumar.K Vs The Secretary</div>
+      <div class="text-sm text-gray-600">Petitions · J. Gopinath P</div>
+      <div class="text-xs text-gray-500 mt-1">(14,119,274,306,401,609,1501-1511)</div>
+    </div>
+
+    <div class="w-[100px] text-right">
+      <div class="text-blue-600 font-bold text-lg">252</div>
+    </div>
+  </div>
+
+  <!-- Row 2 -->
+  <div class="case-row flex bg-white p-4 mb-2 border rounded shadow-sm">
+    <div class="w-[40px] text-center font-bold">2.</div>
+
+    <div class="w-[70px] text-gray-700">WP(C) SC</div>
+
+    <div class="w-[110px] text-gray-700">45366 / 2025</div>
+
+    <div class="w-[70px] text-gray-700">R · 6A</div>
+
+    <div class="flex-1 pr-4">
+      <div class="font-bold">Shaji Vs State Of Kerala (PULPALLY)</div>
+      <div class="text-sm text-gray-600">Admission · J. P. V. Kunhikrishnan</div>
+      <div class="text-xs text-gray-500 mt-1">(62,201,305,409,527,634,728,827…)</div>
+    </div>
+
+    <div class="w-[100px] text-right">
+      <div class="text-blue-600 font-bold text-lg">51</div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
+
