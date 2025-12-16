@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Kerala High Court Tools</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="min-h-screen flex flex-col bg-slate-100">
+
+  <!-- Header -->
+  <header class="bg-gradient-to-r from-indigo-900 to-indigo-800 py-6 text-center shadow">
+    <h1 class="text-white text-2xl md:text-3xl font-semibold tracking-wider">
+      KERALA HIGH COURT TOOLS
+    </h1>
+  </header>
+
+  <!-- Landing Search Area -->
+  <main class="flex-1 flex items-center justify-center">
+    <div class="w-full max-w-2xl px-6">
+
+      <div class="flex flex-col sm:flex-row gap-4 items-center">
+
+        <input
+          id="adv-search-input"
+          type="text"
+          placeholder="Search Advocate"
+          autocomplete="off"
+          class="w-full px-6 py-4 text-lg rounded-lg border border-gray-300
+                 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-700"
+        />
+
+        <button
+          id="adv-search-button"
+          class="px-8 py-4 text-lg rounded-lg text-white
+                 bg-indigo-800 hover:bg-indigo-900 transition shadow"
+        >
+          Search
+        </button>
+
+      </div>
+
+    </div>
+  </main>
+
+</body>
+</html>
+

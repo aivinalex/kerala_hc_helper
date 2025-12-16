@@ -1,24 +1,20 @@
-"use strict";
-
 import fastify from "fastify";
-import path from "path";
 import fastifyStatic from "@fastify/static";
+import path from "path";
 
-const app = fastify({ logger: true });
+const app = fastify({ logger: true }); // creating server insatnce
+
 app.register(fastifyStatic, {
-  root: path.join(process.cwd(), "public"),
-  prefix: "/",
+  root: path.join(process.cwd(), "public"), // creeating a subunstace
 });
-app.get("/", async function routesHandler(request, reply) {
-  try {
-    return reply.sendFile("caselist.html");
-  } catch (err) {
-    response.code(500).send(err.message);
-  }
+
+app.get("/", async (request, reply) => {
+  return reply.sendFile("index.html");
 });
 
 try {
   await app.listen({ port: 3000 });
+  app.log.info("server running at port :3000");
 } catch (err) {
   app.log.error(err);
   process.exit(1);
