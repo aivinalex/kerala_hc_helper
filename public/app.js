@@ -3,8 +3,19 @@
 const searchButton = document.querySelector("#adv-search-button");
 const searchData = document.querySelector("#adv-search-input");
 
-const advocateSearch = function (advocateName) {
-  console.log(`advocate searched is ${advocateName}`);
+const advocateSearch = async function (advocateName) {
+  try {
+    const params = new URLSearchParams({ name: advocateName });
+
+    const res = await fetch(`/api/advocates?${params}`);
+    if (!res.ok) {
+      throw new Error("Server responded with an error");
+    }
+    const data = await res.json();
+    console.log(data);
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 const debounce = function (passedFunction, delay) {
@@ -19,7 +30,7 @@ const debounce = function (passedFunction, delay) {
   };
 };
 
-const advocateSearchDebounce = debounce(advocateSearch, 1000); // debounced advocaet serach
+const advocateSearchDebounce = debounce(advocateSearch, 300); // debounced advocaet serach
 
 searchData.addEventListener("input", (e) => {
   // e.preventDefault(); not nededed , needed only in forms
