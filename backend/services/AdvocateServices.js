@@ -21,7 +21,7 @@ const intilizationUrl =
 const getadvocateUrl =
   "https://hckinfo.keralacourts.in/digicourt/index.php/Casedetailssearch/getAdvocates/1";
 
-const advocateSearch = async function (advocateName) {
+export const advocateSearch = async function (advocateName) {
   try {
     const initParams = new URLSearchParams({
       advcode: "0",
@@ -46,10 +46,8 @@ const advocateSearch = async function (advocateName) {
 
     const data = await res.json();
 
-    console.log(data);
+    return data;
   } catch (err) {
-    console.error(err);
+    throw err;
   }
 };
-
-advocateSearch("manoj ramaswamy");
