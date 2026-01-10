@@ -10,36 +10,122 @@
     <script src="app.js" type="module"></script>
   </head>
 
-  <body class="min-h-screen flex flex-col bg-slate-100">
-    <!-- Header -->
-    <header
-      class="bg-gradient-to-r from-indigo-900 to-indigo-800 py-6 text-center shadow"
-    >
-      <h1 class="text-white text-2xl md:text-3xl font-semibold tracking-wider">
-        KERALA HIGH COURT TOOLS
+  <!-- PAGE BACKGROUND : paper -->
+  <body
+    class="min-h-screen flex flex-col bg-gradient-to-br from-[#fdfaf2] via-[#f9f5e9] to-[#fdfaf2] text-[#3b2f2a]"
+  >
+    <!-- HEADER : authority -->
+    <header class="bg-[#3b2f2a] py-6 text-center">
+      <h1
+        class="text-[#fdfaf2] text-2xl md:text-3xl font-semibold tracking-wider"
+      >
+        KERALA HIGH COURT HELPER TOOLS
       </h1>
     </header>
 
-    <!-- Landing Search Area -->
-    <main class="flex-1 flex items-center justify-center">
-      <div class="w-full max-w-2xl px-6">
-        <div class="flex flex-col sm:flex-row gap-4 items-center">
+    <main class="flex-1 space-y-10 py-10 min-h-[60vh]">
+      <!-- SEARCH SECTION -->
+      <section class="max-w-4xl mx-auto px-8">
+        <form
+          class="flex flex-wrap gap-4 items-center px-12 py-12 bg-[#fffdf6] border border-[#d8cdb5] rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.08)]"
+        >
+          <!-- SEARCH INPUT + GOOGLE STYLE DROPDOWN -->
+          <div class="relative flex-1 min-w-[220px]">
+            <input
+              id="adv-search-input"
+              type="text"
+              placeholder="Search Advocate"
+              class="w-full px-6 py-4 text-lg bg-white border border-[#c9b79c] rounded-xl placeholder:text-[#9a8f7a] focus:outline-none focus:ring-2 focus:ring-[#8b6f47]"
+            />
+
+            <!-- GOOGLE STYLE DROPDOWN -->
+            <div
+              id="advocateSuggestions"
+              class="absolute hidden right-0 top-full bg-[#fffdf6] border border-t-0 border-[#c9b79c] rounded-b-xl shadow-lg z-50"
+            >
+              <div class="px-6 py-3 text-sm cursor-pointer hover:bg-[#f4ecd8]">
+                Manu K. Nair
+              </div>
+              <div class="px-6 py-3 text-sm cursor-pointer hover:bg-[#f4ecd8]">
+                Manoj Kumar
+              </div>
+              <div class="px-6 py-3 text-sm cursor-pointer hover:bg-[#f4ecd8]">
+                Maneesh P.
+              </div>
+            </div>
+          </div>
+
+          <!-- DATE -->
           <input
-            id="adv-search-input"
-            type="text"
-            placeholder="Search Advocate"
-            autocomplete="off"
-            class="w-full px-6 py-4 text-lg rounded-lg border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-700"
+            id="adv-search-date"
+            type="date"
+            class="px-6 py-4 text-lg rounded-xl bg-white border border-[#c9b79c] text-[#5a4a33] focus:outline-none focus:ring-2 focus:ring-[#8b6f47]"
           />
 
+          <!-- SEARCH BUTTON -->
           <button
             id="adv-search-button"
-            class="px-8 py-4 text-lg rounded-lg text-white bg-indigo-800 hover:bg-indigo-900 transition shadow"
+            type="button"
+            class="px-8 py-4 text-lg rounded-xl text-white bg-[#8b6f47] hover:bg-[#7a5f3d] transition cursor-pointer"
           >
             Search
           </button>
+        </form>
+      </section>
+
+      <!-- CAUSE LIST -->
+      <section class="max-w-4xl mx-auto px-6 hidden">
+        <h2 class="mb-4 text-center text-lg font-semibold text-[#5a4a33]">
+          Cause List
+        </h2>
+
+        <!-- TABLE CONTAINER : document -->
+        <div
+          class="bg-[#fffdf6] border border-[#d8cdb5] rounded-xl overflow-x-auto"
+        >
+          <table class="w-full table-fixed text-center text-sm">
+            <!-- COLUMN WIDTHS -->
+            <colgroup>
+              <col class="w-8" />
+              <col class="w-32" />
+              <col class="w-40" />
+              <col class="w-8" />
+              <col class="w-24" />
+              <col class="w-40" />
+              <col class="w-48" />
+            </colgroup>
+
+            <!-- TABLE HEADER -->
+            <thead class="bg-[#f4ecd8] text-[#5a4a33] text-xs font-semibold">
+              <tr>
+                <th class="px-4 py-3">Sl. No</th>
+                <th class="px-4 py-3">Case No</th>
+                <th class="px-4 py-3">Case Name</th>
+                <th class="px-4 py-3">P/R</th>
+                <th class="px-4 py-3">Stage</th>
+                <th class="px-4 py-3">Bench</th>
+                <th class="px-4 py-3">Item</th>
+              </tr>
+            </thead>
+
+            <!-- TABLE BODY -->
+            <tbody>
+              <tr class="border-b border-[#e5dcc8]">
+                <td class="px-4 py-3">1</td>
+                <td class="px-4 py-3 whitespace-nowrap">WPC 2323/2023</td>
+                <td class="px-4 py-3">Ramu vs Damu</td>
+                <td class="px-4 py-3">P/R</td>
+                <td class="px-4 py-3">Hearing</td>
+                <td class="px-4 py-3">J. C. Jayachandran</td>
+                <td class="px-4 py-3 break-words">
+                  item 121 <br />
+                  (30,160,227,348,501,605,723,1501-1521)
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-      </div>
+      </section>
     </main>
   </body>
 </html>
