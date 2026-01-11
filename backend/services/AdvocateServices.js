@@ -45,7 +45,7 @@ export const advocateSearch = async function (advocateName) {
     });
 
     const data = await res.json();
-
+    console.log(data);
     return data;
   } catch (err) {
     throw err;
