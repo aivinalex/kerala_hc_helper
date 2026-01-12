@@ -206,6 +206,9 @@
   .hidden {
     display: none;
   }
+  .max-h-60 {
+    max-height: calc(var(--spacing) * 60);
+  }
   .min-h-\[60vh\] {
     min-height: 60vh;
   }
@@ -266,6 +269,9 @@
   }
   .overflow-x-auto {
     overflow-x: auto;
+  }
+  .overflow-y-auto {
+    overflow-y: auto;
   }
   .rounded-2xl {
     border-radius: var(--radius-2xl);
