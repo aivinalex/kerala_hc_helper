@@ -1,3 +1,4 @@
+// @ts-nocheck
 "use strict";
 
 //html elements
@@ -14,28 +15,37 @@ const debounce = function (passedFunction, delay) {
   // first debounce creaetd
   let timer;
 
-  return function (...arg) {
+  const debounced = function (...arg) {
     clearTimeout(timer);
     timer = setTimeout(() => {
       passedFunction(...arg);
     }, delay);
   };
+
+  debounced.cancel = () => clearTimeout(timer);
+  return debounced;
 };
 
 const advocateDetail = {
-  selectedAdvocates: new Set(),
+  selectedAdvocates: new Map(),
   advocateCache: new Map(),
+  searchController: null,
 
   search: async function (advocateName) {
+    if (this.searchController) this.searchController.abort();
+    this.searchController = new AbortController();
     try {
       const params = new URLSearchParams({ name: advocateName });
 
-      const res = await fetch(`/api/advocates?${params}`);
+      const res = await fetch(`/api/advocates?${params}`, {
+        signal: this.searchController.signal,
+      });
       if (!res.ok) {
         throw new Error("Server responded with an error");
       }
       const data = await res.json();
       console.log(data);
+
       this.displaySuggestion(data);
     } catch (err) {
       console.log(err);
@@ -80,6 +90,7 @@ const advocateDetail = {
       newPill.appendChild(newSpan);
       newPill.appendChild(closeBtn);
       advocateSelectionContainer.appendChild(newPill);
+      this.clearSuggestion();
     });
   },
 };
@@ -95,6 +106,7 @@ searchData.addEventListener("input", (e) => {
   const searchValue = searchData.value?.trim().toLowerCase();
   if (!searchValue || searchValue.length < 4) {
     advocateDetail.clearSuggestion();
+    advocateDetail.advocateSearchDebounce.cancel();
     return;
   }
 
@@ -102,7 +114,6 @@ searchData.addEventListener("input", (e) => {
 }); //  debounced search and render suggestions
 
 document.addEventListener("click", (e) => {
-  e.preventDefault();
   const isSearchinput = searchData.contains(e.target); // check wether clicked is a child element of searchdata
   const isSelectioninput = advocateSuggestionContainer.contains(e.target); // same as above
 
@@ -110,12 +121,17 @@ document.addEventListener("click", (e) => {
 }); // for cleraing on outside click
 
 advocateSuggestionContainer.addEventListener("click", (e) => {
-  e.preventDefault();
   const itemClicked = e.target.closest("[data-keyval]"); //saved the closed child elemem which has the key
   if (!itemClicked) return;
   const selected = itemClicked.dataset.keyval; // get keyvalue
-  const data = advocateDetail.advocateCache.get(selected); // get the data from map where key value is key value
-  advocateDetail.selectedAdvocates.add(data); // add selected into  selected advocates
+  const data = advocateDetail.advocateCache.get(selected); // get
+  if (advocateDetail.selectedAdvocates.has(selected)) {
+    console.log("already selected");
+    return;
+  }
+  //the data from map where key value is key value
+  advocateDetail.selectedAdvocates.set(selected, data); // add selected into  selected advocates
   console.log(advocateDetail.selectedAdvocates);
+  console.log("selected");
   advocateDetail.renderSelection();
 });
