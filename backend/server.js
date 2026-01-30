@@ -1,14 +1,16 @@
 import fastify from "fastify";
 import fastifyStatic from "@fastify/static";
 import path from "path";
-import advocateRoutes from "./routes/advocateRoutes.js";
+import { advocateRoutes } from "./routes/apiRoutes.js";
+import { causeListRoute } from "./routes/apiRoutes.js";
 
 const app = fastify({ logger: true }); // creating s.jserver insatnce
 
 app.register(fastifyStatic, {
-  root: path.join(process.cwd(), "public"), // creeating a subunstace
+  root: path.join(process.cwd(), "public"),
 });
-app.register(advocateRoutes, { prefix: "/api" }); // registerd advocate serach api
+app.register(advocateRoutes, { prefix: "/api" });
+app.register(causeListRoute, { prefix: "/api" });
 app.get("/home", async (request, reply) => {
   return reply.sendFile("index.html");
 }); //

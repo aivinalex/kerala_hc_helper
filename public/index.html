@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <link rel="stylesheet" href="./output.css" />
-    <script src="app.js" type="module"></script>
+    <script type="module" src="app.js"></script>
   </head>
 
   <!-- PAGE BACKGROUND : paper -->
@@ -26,31 +26,47 @@
       <!-- SEARCH SECTION -->
       <section class="max-w-4xl mx-auto px-8">
         <form
-          class="flex flex-wrap gap-4 items-center px-12 py-12 bg-[#fffdf6] border border-[#d8cdb5] rounded-2xl"
+          class="flex flex-wrap gap-4 items-start px-12 py-12 bg-[#fffdf6] border border-[#d8cdb5] rounded-2xl"
         >
-          <div class="relative flex-1 min-w-[220px]">
-            <input
-              id="adv-search-input"
-              type="text"
-              placeholder="Search Advocate"
-              class="w-full px-6 py-4 text-lg bg-white border border-[#c9b79c] rounded-xl placeholder:text-[#9a8f7a] focus:outline-none focus:ring-2 focus:ring-[#8b6f47]"
-            />
-
-            <div
-              id="advocateSuggestions"
-              class="absolute w-full max-h-60 overflow-y-auto left-0 top-full bg-[#fffdf6] rounded-b-xl shadow-lg z-50"
-            ></div>
+          <div class="flex-1 min-w-[220px]">
+            <div class="relative">
+              <input
+                id="adv-search-input"
+                type="text"
+                placeholder="Search Advocate"
+                class="w-full px-6 py-4 text-lg bg-white border border-[#c9b79c] rounded-xl placeholder:text-[#9a8f7a] focus:outline-none transition-all"
+              />
+              <div
+                id="advocateSuggestions"
+                class="absolute w-full max-h-60 overflow-y-auto left-0 top-full bg-[#fffdf6] rounded-b-xl shadow-lg z-50"
+              ></div>
+            </div>
+            <p
+              id="name-error"
+              class="hidden text-red-600 text-xs mt-2 ml-2 font-medium"
+            >
+              Please select at least one advocate
+            </p>
           </div>
-          <input
-            id="adv-search-date"
-            type="date"
-            class="px-6 py-4 text-lg rounded-xl bg-white border border-[#c9b79c] text-[#5a4a33] focus:outline-none focus:ring-2 focus:ring-[#8b6f47]"
-          />
+
+          <div class="flex flex-col">
+            <input
+              id="adv-search-date"
+              type="date"
+              class="px-6 py-4 text-lg rounded-xl bg-white border border-[#c9b79c] text-[#5a4a33] focus:outline-none transition-all"
+            />
+            <p
+              id="date-error"
+              class="hidden text-red-600 text-xs mt-2 ml-2 font-medium"
+            >
+              Please select a date
+            </p>
+          </div>
 
           <button
             id="adv-search-button"
             type="button"
-            class="px-8 py-4 text-lg rounded-xl text-white bg-[#8b6f47] hover:bg-[#7a5f3d] transition cursor-pointer"
+            class="px-8 py-4 text-lg rounded-xl text-white bg-[#8b6f47] hover:bg-[#7a5f3d] transition cursor-pointer self-start"
           >
             Search
           </button>
