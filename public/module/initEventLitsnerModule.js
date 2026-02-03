@@ -1,6 +1,7 @@
 import { toggleErrorMessager } from "./helperModule.js";
 import { advocateDetail } from "./advocateModule.js";
 import { nodesModule } from "./nodeModule.js";
+import { causeListSearch } from "./causlistModule.js";
 
 console.log("event listeners intilized");
 
@@ -23,15 +24,16 @@ export const initEventlisteners = function () {
       return;
     }
     advocateDetail.advocateSearchDebounce(searchValue);
-  });
+  }); // devounced search on key stroke
 
   document.addEventListener("click", (e) => {
     const isSearchinput = searchData.contains(e.target);
     const isSelectioninput = advocateSuggestionContainer.contains(e.target);
     if (!isSearchinput && !isSelectioninput) advocateDetail.clearSuggestion();
-  });
+  }); // clear suggestion if outside suggestion box
 
   advocateSuggestionContainer.addEventListener("click", (e) => {
+    // selection handler
     const itemClicked = e.target.closest("[data-keyval]");
     if (!itemClicked) return;
     const selected = itemClicked.dataset.keyval;
@@ -48,8 +50,7 @@ export const initEventlisteners = function () {
 
   advocateSelectionContainer.addEventListener("click", (e) => {
     advocateDetail.pillRemove(e);
-  });
-
+  }); // selection pill remove
   searchButton.addEventListener("click", (e) => {
     e.preventDefault();
     const isDateEmpty = !searchDate.value;
@@ -62,6 +63,13 @@ export const initEventlisteners = function () {
       if (isNameSelectedEmpty) toggleErrorMessager(searchData, nameError, true);
       return;
     }
+    const data = causeListSearch()
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => console.log(err));
+    console.log(data);
+
     console.log("serach clicked");
   });
 
