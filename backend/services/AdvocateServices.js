@@ -1,44 +1,18 @@
 "use strict";
 
-import fetchCookie from "fetch-cookie";
-import { CookieJar } from "tough-cookie";
+import { BASE_URL, headers, getCourtFetch } from "../helpers/helperModule.js";
 
-const jar = new CookieJar(); // creating a  jar for storing cookie
-const cookieFetch = fetchCookie(fetch, jar); // now fetch with cookie
-const headers = {
-  "User-Agent": "Mozilla/5.0",
-  "X-Requested-With": "XMLHttpRequest",
-  Accept: "application/json, text/javascript, */*; q=0.01",
-  Referer:
-    "https://hckinfo.keralacourts.in/digicourt/Casedetailssearch/Advocatesearch",
-  Origin: "https://hckinfo.keralacourts.in",
-  "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-};
-
-const intilizationUrl =
-  "https://hckinfo.keralacourts.in/digicourt/index.php/Casedetailssearch/findAdvocate";
-
-const getadvocateUrl =
-  "https://hckinfo.keralacourts.in/digicourt/index.php/Casedetailssearch/getAdvocates/1";
+const getadvocateUrl = `${BASE_URL}/Casedetailssearch/getAdvocates/1`;
 
 export const advocateSearch = async function (advocateName) {
   try {
-    const initParams = new URLSearchParams({
-      advcode: "0",
-      advname: "",
-    });
-
-    await cookieFetch(intilizationUrl, {
-      method: "post",
-      headers,
-      body: initParams.toString(),
-    });
+    const courtFetch = await getCourtFetch();
 
     const searchBody = new URLSearchParams({
       search: advocateName,
     });
 
-    const res = await cookieFetch(getadvocateUrl, {
+    const res = await courtFetch(getadvocateUrl, {
       method: "post",
       headers,
       body: searchBody.toString(),

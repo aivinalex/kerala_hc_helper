@@ -1,8 +1,9 @@
 import { nodesModule } from "./nodeModule.js";
 
 const { advocateSuggestionContainer, advocateSelectionContainer } = nodesModule;
+export const selectedAdvocates = new Map();
 export const advocateDetail = {
-  selectedAdvocates: new Map(),
+  selectedAdvocates: selectedAdvocates,
   advocateCache: new Map(),
   searchController: null,
 

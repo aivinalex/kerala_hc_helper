@@ -16,6 +16,13 @@ export const initEventlisteners = function () {
     advocateSelectionContainer,
   } = nodesModule;
 
+  searchData.addEventListener("focus", (e) => {
+    toggleErrorMessager(searchData, nameError, false);
+  });
+  searchDate.addEventListener("focus", (e) => {
+    toggleErrorMessager(searchDate, dateError, false);
+  });
+
   searchData.addEventListener("input", (e) => {
     const searchValue = searchData.value?.trim().toLowerCase();
     if (!searchValue || searchValue.length < 4) {
@@ -51,11 +58,12 @@ export const initEventlisteners = function () {
   advocateSelectionContainer.addEventListener("click", (e) => {
     advocateDetail.pillRemove(e);
   }); // selection pill remove
-  searchButton.addEventListener("click", (e) => {
+  searchButton.addEventListener("click", async (e) => {
     e.preventDefault();
+
     const isDateEmpty = !searchDate.value;
     const isNameSelectedEmpty = advocateDetail.selectedAdvocates.size === 0;
-
+    console.log("search event clicked");
     toggleErrorMessager(searchData, nameError, false);
     toggleErrorMessager(searchDate, dateError, false);
     if (isDateEmpty || isNameSelectedEmpty) {
@@ -63,12 +71,19 @@ export const initEventlisteners = function () {
       if (isNameSelectedEmpty) toggleErrorMessager(searchData, nameError, true);
       return;
     }
-    const data = causeListSearch()
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((err) => console.log(err));
-    console.log(data);
+    const date = searchDate.value;
+    console.log(advocateDetail.selectedAdvocates);
+    console.log(date);
+
+    try {
+      const data = await causeListSearch(
+        date,
+        advocateDetail.selectedAdvocates,
+      );
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
 
     console.log("serach clicked");
   });

@@ -15,7 +15,6 @@ export async function advocateRoutes(fastify) {
     },
   };
 
-  // Usage: fastify.get("/advocates", searchSchema, async (req, reply) => { ... })
   fastify.get("/advocates", searchSchema, async (req, reply) => {
     const { name } = req.query;
 
@@ -39,9 +38,13 @@ export async function advocateRoutes(fastify) {
 }
 
 export const causeListRoute = async function (fastify) {
-  fastify.get("/causelist", async (req, reply) => {
+  fastify.post("/causelist", async (req, reply) => {
     try {
-      const data = await causlistSearch();
+      const { advocates, date } = req.body;
+
+      console.log("reached  causelist route");
+
+      const data = await causlistSearch(advocates, date);
       return { results: data };
     } catch (err) {
       console.log(err);
