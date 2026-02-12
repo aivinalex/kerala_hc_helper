@@ -84,8 +84,6 @@ export const initEventlisteners = function () {
     } catch (err) {
       console.log(err);
     }
-
-    console.log("serach clicked");
   });
 
   searchData.addEventListener("focus", (e) => {

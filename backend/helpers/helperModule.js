@@ -23,19 +23,23 @@ export const getCourtFetch = async () => {
   if (!initialized) {
     const initUrl = `${BASE_URL}/Casedetailssearch/findAdvocate`;
     const initParams = new URLSearchParams({ advcode: "0", advname: "" });
-    
+
     await courtFetch(initUrl, {
       method: "POST",
       headers,
       body: initParams.toString(),
     });
-    
+
     initialized = true;
   }
-  
+
   return courtFetch;
 };
 
 export const encode = (data) =>
   Buffer.from(encodeURIComponent(data)).toString("base64");
 
+export const randomDelayed = (...args) =>
+  new Promise((resolve) =>
+    setTimeout(() => resolve(args), Math.random() * 1000)
+  );
