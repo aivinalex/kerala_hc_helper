@@ -6,6 +6,11 @@ const selectors = {
   dateError: "#date-error",
   advocateSuggestionContainer: "#advocateSuggestions",
   advocateSelectionContainer: "#selected-advocates-container",
+  advocateSearchSection: "#search-section",
+  advocateSearchForm: "#search-form",
+  causelistContainer: "#cause-list-section",
+  searchBody: "#searchbody",
+  tableBody: "#tablebody",
 };
 
 export const nodesModule = Object.fromEntries(

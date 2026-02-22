@@ -15,14 +15,17 @@ A web application to search and retrieve cause lists from the Kerala High Court 
 
 - Vanilla JavaScript (ES6+)
 - HTML/CSS
+- Tailwind CSS
 - Fetch API
 
 **Backend:**
 
 - Node.js
 - Fastify (web framework)
+- @fastify/static (static file serving)
 - Cheerio (HTML parsing)
 - fetch-cookie (session management)
+- tough-cookie (cookie handling)
 
 ## Project Structure
 
@@ -36,17 +39,21 @@ highcourt helper/
 │   │   └── apiRoutes.js           # API endpoints
 │   ├── helpers/
 │   │   ├── helperModule.js        # Shared utilities
-│   │   └── causelistParaser.js    # HTML parsing logic
+│   │   └── causelistParser.js     # HTML parsing logic
 │   └── server.js                  # Server entry point
 ├── public/
 │   ├── module/
 │   │   ├── advocateModule.js      # Advocate UI logic
-│   │   ├── causlistModule.js      # Cause list UI logic
+│   │   ├── causelistModule.js     # Cause list UI logic
 │   │   ├── helperModule.js        # Frontend utilities
 │   │   ├── nodeModule.js          # DOM element references
-│   │   └── initEventLitsnerModule.js  # Event handlers
+│   │   └── initEventListenerModule.js  # Event handlers
 │   ├── app.js                     # Frontend entry point
-│   └── index.html                 # Main HTML file
+│   ├── index.html                 # Main HTML file
+│   ├── output.css                 # Compiled Tailwind CSS
+│   └── updateDom.css              # Custom styles
+├── input.css                      # Tailwind source
+├── package.json
 └── README.md
 ```
 
@@ -56,7 +63,7 @@ highcourt helper/
 
 ```bash
 git clone https://github.com/aivinalex/kerala_hc_helper
-cd "highcourt helper"
+
 ```
 
 2. Install dependencies:
@@ -68,7 +75,13 @@ npm install
 3. Start the server:
 
 ```bash
-npm start
+node backend/server.js
+```
+
+Or use nodemon for development:
+
+```bash
+nodemon backend/server.js
 ```
 
 4. Open browser and navigate to:
@@ -130,15 +143,13 @@ Fetch cause list for multiple advocates.
 4. **Frontend requests cause list** - Sends POST to `/api/causelist`
 5. **Backend fetches data sequentially** - With random delays (1-3s) between requests
 6. **HTML parsing** - Cheerio extracts case data from court website HTML
-7. **Retry mechanism** - Failed requests are retried up to 3 times
-8. **Results returned** - Parsed case data sent back to frontend
+7. **Results returned** - Parsed case data sent back to frontend
 
 ## Configuration
 
 **Delay Settings** (in `causeListService.js`):
 
 - Between requests: 1000-2000ms (random)
-- Retry delay: 1000ms
 
 **Court Website:**
 

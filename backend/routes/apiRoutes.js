@@ -1,6 +1,6 @@
 "use strict";
 import { advocateSearch } from "../services/AdvocateServices.js";
-import { causlistSearch } from "../services/causeListService.js";
+import { causelistSearch } from "../services/causeListService.js";
 
 export async function advocateRoutes(fastify) {
   const searchSchema = {
@@ -44,7 +44,7 @@ export const causeListRoute = async function (fastify) {
 
       console.log("reached  causelist route");
 
-      const data = await causlistSearch(advocates, date);
+      const data = await causelistSearch(advocates, date);
       return { results: data };
     } catch (err) {
       console.log(err);

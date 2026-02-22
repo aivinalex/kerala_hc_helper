@@ -1,11 +1,11 @@
 import { toggleErrorMessager } from "./helperModule.js";
 import { advocateDetail } from "./advocateModule.js";
 import { nodesModule } from "./nodeModule.js";
-import { causeListSearch } from "./causlistModule.js";
+import { causeListSearch, caselistMerge } from "./causelistModule.js";
 
-console.log("event listeners intilized");
+console.log("event listeners initialized");
 
-export const initEventlisteners = function () {
+export const initEventListeners = function () {
   const {
     searchButton,
     searchData,
@@ -14,16 +14,18 @@ export const initEventlisteners = function () {
     dateError,
     advocateSuggestionContainer,
     advocateSelectionContainer,
+    searchBody,
+    causelistContainer,
   } = nodesModule;
 
-  searchData.addEventListener("focus", (e) => {
+  searchData.addEventListener("focus", () => {
     toggleErrorMessager(searchData, nameError, false);
   });
-  searchDate.addEventListener("focus", (e) => {
+  searchDate.addEventListener("focus", () => {
     toggleErrorMessager(searchDate, dateError, false);
   });
 
-  searchData.addEventListener("input", (e) => {
+  searchData.addEventListener("input", () => {
     const searchValue = searchData.value?.trim().toLowerCase();
     if (!searchValue || searchValue.length < 4) {
       advocateDetail.clearSuggestion();
@@ -31,7 +33,7 @@ export const initEventlisteners = function () {
       return;
     }
     advocateDetail.advocateSearchDebounce(searchValue);
-  }); // devounced search on key stroke
+  }); // debounced search on key stroke
 
   document.addEventListener("click", (e) => {
     const isSearchinput = searchData.contains(e.target);
@@ -80,13 +82,18 @@ export const initEventlisteners = function () {
         date,
         advocateDetail.selectedAdvocates,
       );
+      if (!data.results?.length) throw new Error("No causelist found");
       console.log(data);
+      console.log(caselistMerge(data));
+      //console.log(mergedData);
+      searchBody.classList.add("search-active");
+      causelistContainer.classList.remove("hidden");
     } catch (err) {
       console.log(err);
     }
   });
 
-  searchData.addEventListener("focus", (e) => {
+  searchData.addEventListener("focus", () => {
     toggleErrorMessager(searchData, nameError, false);
   });
 };

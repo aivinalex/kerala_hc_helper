@@ -1,5 +1,5 @@
 export const debounce = function (passedFunction, delay) {
-  // first debounce creaetd
+  // first debounce created
   let timer;
 
   const debounced = function (...arg) {

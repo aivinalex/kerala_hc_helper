@@ -3,7 +3,7 @@ import * as cheerio from "cheerio";
 export const parseCauseList = function (data) {
   const $ = cheerio.load(data);
   const caseDetail = [];
-  $(" table tbody tr").each((i, row) => {
+  $(" table tbody tr").each((_i, row) => {
     const col = $(row).find("td");
     console.log(col);
     const itemNo = $(col[0]).find("strong").text().trim();

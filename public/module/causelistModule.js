@@ -1,6 +1,7 @@
 import { nodesModule } from "./nodeModule.js";
 
 let causeListController = null;
+const { tablebody } = nodesModule;
 
 export const causeListSearch = async function (date, selectedAdvocates) {
   const selectedArray = Array.from(selectedAdvocates, ([key, value]) => ({
@@ -27,7 +28,7 @@ export const causeListSearch = async function (date, selectedAdvocates) {
     }
 
     const data = await result.json();
-    console.log(data);
+    console.log(" cause list search sucess full");
     return data;
   } catch (err) {
     console.log(err.message);
@@ -37,3 +38,25 @@ export const causeListSearch = async function (date, selectedAdvocates) {
     throw err;
   }
 };
+
+export const caselistMerge = function (data) {
+  const seen = new Set();
+  return data.results.reduce(
+    (acc, current) => {
+      if (current.caselist) {
+        for (const value of current.caselist) {
+          const combinedKey = `${value.itemNo}-${value.courtHall}`;
+          if (!seen.has(combinedKey)) {
+            seen.add(combinedKey);
+            acc.causelist.push(value);
+          }
+        }
+      } else acc.noListAdvocate.push(current.advocate);
+
+      return acc;
+    },
+    { causelist: [], noListAdvocate: [] },
+  );
+};
+
+export const createTable = function (data) {};

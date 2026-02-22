@@ -6,7 +6,7 @@ import {
   getCourtFetch,
   encode,
 } from "../helpers/helperModule.js";
-import { parseCauseList } from "../helpers/causelistParaser.js";
+import { parseCauseList } from "../helpers/causelistParser.js";
 
 const SEARCH_URL = `${BASE_URL}/Casedetailssearch/Casebyadv1`;
 
@@ -30,7 +30,7 @@ const delayedSearch = async function (searchParamsArray) {
         results.push({
           advocate: searchParamsArray[i].advocate,
           caselist: null,
-          sucess: true,
+          success: true,
         });
         continue;
       }
@@ -38,7 +38,7 @@ const delayedSearch = async function (searchParamsArray) {
       results.push({
         advocate: searchParamsArray[i].advocate,
         caselist: parseCauseList(html),
-        sucess: true,
+        success: true,
       });
     } catch (err) {
       console.error(`Failed to fetch advocate ${i + 1}:`, err.message);
@@ -46,7 +46,7 @@ const delayedSearch = async function (searchParamsArray) {
         advocate: searchParamsArray[i].advocate,
 
         caselist: [],
-        sucess: false,
+        success: false,
       });
     }
     await delay(1000 + Math.random() * 1000);
@@ -55,7 +55,7 @@ const delayedSearch = async function (searchParamsArray) {
   return results;
 };
 
-export const causlistSearch = async function (advocates = [], date) {
+export const causelistSearch = async function (advocates = [], date) {
   console.log("reached causelist search");
   console.log(advocates, date);
   if (!advocates.length) return [];

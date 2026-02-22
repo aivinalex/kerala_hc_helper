@@ -3,7 +3,7 @@
 
 import { advocateDetail } from "./module/advocateModule.js";
 import { debounce } from "./module/helperModule.js";
-import { initEventlisteners } from "./module/initEventLitsnerModule.js";
+import { initEventListeners } from "./module/initEventListenerModule.js";
 
 advocateDetail.advocateSearchDebounce = debounce(
   advocateDetail.search.bind(advocateDetail),
@@ -11,4 +11,4 @@ advocateDetail.advocateSearchDebounce = debounce(
 );
 
 console.log("app.js loaded");
-initEventlisteners();
+initEventListeners();
