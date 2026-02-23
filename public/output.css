@@ -272,6 +272,9 @@
   .cursor-pointer {
     cursor: pointer;
   }
+  .grid-cols-1 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
   .grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -281,17 +284,14 @@
   .flex-wrap {
     flex-wrap: wrap;
   }
+  .place-items-center {
+    place-items: center;
+  }
   .items-center {
     align-items: center;
   }
-  .items-start {
-    align-items: flex-start;
-  }
   .items-stretch {
     align-items: stretch;
-  }
-  .justify-between {
-    justify-content: space-between;
   }
   .gap-2 {
     gap: calc(var(--spacing) * 2);
@@ -462,9 +462,6 @@
   }
   .text-\[\#5a4a33\] {
     color: #5a4a33;
-  }
-  .text-\[\#6b5a45\] {
-    color: #6b5a45;
   }
   .text-\[\#8b6f47\] {
     color: #8b6f47;
