@@ -11,6 +11,8 @@ const selectors = {
   causelistContainer: "#cause-list-section",
   searchBody: "#searchbody",
   tableBody: "#tablebody",
+  cardContainer: "#cause-list-cards",
+  cardTemplate: "#card-template",
 };
 
 export const nodesModule = Object.fromEntries(

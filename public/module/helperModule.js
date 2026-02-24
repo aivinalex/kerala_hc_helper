@@ -25,3 +25,9 @@ export const toggleErrorMessager = function (input, errorElement, isError) {
     input.classList.remove(...errorClasses);
   }
 };
+export function createElement(elementType, className = '', text = '') {
+  const element = document.createElement(elementType);
+  if (className) element.className = className;
+  if (text) element.textContent = text;
+  return element;
+}

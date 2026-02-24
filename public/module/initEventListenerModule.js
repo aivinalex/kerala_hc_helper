@@ -1,7 +1,12 @@
 import { toggleErrorMessager } from "./helperModule.js";
 import { advocateDetail } from "./advocateModule.js";
 import { nodesModule } from "./nodeModule.js";
-import { causeListSearch, caselistMerge } from "./causelistModule.js";
+import {
+  causeListSearch,
+  caselistMerge,
+  createTableDesktop,
+  createCardMobile,
+} from "./causelistModule.js";
 
 console.log("event listeners initialized");
 
@@ -82,12 +87,17 @@ export const initEventListeners = function () {
         date,
         advocateDetail.selectedAdvocates,
       );
-      if (!data.results?.length) throw new Error("No causelist found");
-      console.log(data);
-      console.log(caselistMerge(data));
-      //console.log(mergedData);
-      searchBody.classList.add("search-active");
-      causelistContainer.classList.remove("hidden");
+      //
+
+      if (data.results?.length) {
+        const mergedData = caselistMerge(data);
+        console.log(mergedData);
+        createTableDesktop(mergedData);
+        createCardMobile(mergedData);
+
+        searchBody.classList.add("search-active");
+        causelistContainer.classList.remove("hidden");
+      }
     } catch (err) {
       console.log(err);
     }
