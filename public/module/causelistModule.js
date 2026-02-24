@@ -1,7 +1,8 @@
 import { nodesModule } from "./nodeModule.js";
 
 let causeListController = null;
-const { tableBody, cardContainer, cardTemplate } = nodesModule;
+const { tableBody, cardContainer, cardTemplate, tableRowTemplate } =
+  nodesModule;
 
 export const causeListSearch = async function (date, selectedAdvocates) {
   const selectedArray = Array.from(selectedAdvocates, ([key, value]) => ({
@@ -58,24 +59,27 @@ export const caselistMerge = function (data) {
 };
 
 export const createTableDesktop = function (data) {
-  tableBody.innerHTML = "";
+  tableBody.innerHTML = " ";
 
   data.causelist.forEach((element, i) => {
-    const tr = document.createElement("tr");
-    tr.className = "border-b border-[#e5dcc8]";
+    const cloneRow = tableRowTemplate.content.cloneNode(true);
 
-    tr.innerHTML = `
-      <td class="px-4 py-3">${i + 1}</td>
-      <td class="px-4 py-3 whitespace-nowrap">${element.caseNo}</td>
-      <td class="px-4 py-3">${element.parties}</td>
-      <td class="px-4 py-3">P/R</td>
-      <td class="px-4 py-3">${element.list}</td>
-      <td class="px-4 py-3">${element.benchName}</td>
-       <td class="px-4 py-3">${element.courtHall}</td>
-      <td class="px-4 py-3 wrap-break-word">item ${element.itemNo}<br>${element.items || ""}</td>
-    `;
+    cloneRow.querySelector(".js-sl-no").textContent = i + 1;
+    cloneRow.querySelector(".js-case-no").textContent = element.caseNo;
+    cloneRow.querySelector(".js-parties").textContent = element.parties;
+    cloneRow.querySelector(".js-stage").textContent = element.list;
+    cloneRow.querySelector(".js-bench").textContent = element.benchName;
+    cloneRow.querySelector(".js-court").textContent = element.courtHall;
 
-    tableBody.appendChild(tr);
+    const itemCell = cloneRow.querySelector(".js-item");
+    itemCell.textContent = `item ${element.itemNo}`;
+    itemCell.appendChild(document.createElement("br")); // Add the break
+
+    // Create a span for the sub-items to style them if needed
+    const subItems = document.createElement("span");
+    subItems.textContent = element.items || "";
+    itemCell.appendChild(subItems);
+    tableBody.appendChild(cloneRow);
   });
 };
 

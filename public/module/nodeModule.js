@@ -13,6 +13,7 @@ const selectors = {
   tableBody: "#tablebody",
   cardContainer: "#cause-list-cards",
   cardTemplate: "#card-template",
+  tableRowTemplate: "#row-template",
 };
 
 export const nodesModule = Object.fromEntries(

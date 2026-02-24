@@ -19,7 +19,7 @@ export const parseCauseList = function (data) {
     const benchRaw = $(col[2]).text().trim();
     const benchName = benchRaw
       .replace(/^\d+\s*-\s*/, "")
-      .replace(/HONOURABLE\s+(MR\.|MS\.|MRS\.)?\s*JUSTICE/i, "Hon. J.")
+      .replace(/HONOURABLE\s+(MR\.|MS\.|MRS\.)?\s*JUSTICE/gi, "Hon. J.")
       .trim();
 
     const list = $(col[3]).text().trim();
