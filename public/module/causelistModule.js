@@ -40,7 +40,7 @@ export const causeListSearch = async function (date, selectedAdvocates) {
 
 export const caselistMerge = function (data) {
   const seen = new Set();
-  return data.results.reduce(
+  const mergedList = data.results.reduce(
     (acc, current) => {
       if (current.caselist) {
         for (const value of current.caselist) {
@@ -56,6 +56,16 @@ export const caselistMerge = function (data) {
     },
     { causelist: [], noListAdvocate: [] },
   );
+
+  mergedList.causelist.sort((itemA, ItemB) => {
+    const primary = itemA.courtHall.localeCompare(ItemB.courtHall, undefined, {
+      numeric: true,
+    });
+    if (primary !== 0) return primary;
+    return Number(itemA.itemNo) - Number(ItemB.itemNo);
+  });
+
+  return mergedList;
 };
 
 export const createTableDesktop = function (data) {
