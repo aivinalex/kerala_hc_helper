@@ -1,10 +1,15 @@
 .search-active #search-section {
-  position: sticky;
-  top: 0;
-  z-index: 40;
   background: linear-gradient(to bottom right, #fdfaf2, #f9f5e9, #fdfaf2);
   padding-top: 1rem;
   padding-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+  .search-active #search-section {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+  }
 }
 
 .search-active #search-form {
