@@ -16,7 +16,7 @@
     class="min-h-screen flex flex-col bg-linear-to-br from-[#fdfaf2] via-[#f9f5e9] to-[#fdfaf2] text-[#3b2f2a]"
   >
     <!-- HEADER : authority -->
-    <header class="bg-[#3b2f2a] py-6 text-center">
+    <header class="bg-[#3b2f2a] py-6 text-center relative">
       <h1
         class="text-[#fdfaf2] text-2xl md:text-3xl font-semibold tracking-wider"
       >
@@ -111,7 +111,7 @@
               <col class="w-8" />
               <col class="w-32" />
               <col class="w-42" />
-              <col class="w-6" />
+              <!--col class="w-6"-->
               <col class="w-24" />
               <col class="w-40" />
               <col class="w-20" />
@@ -124,7 +124,7 @@
                 <th class="px-4 py-3">Sl. No</th>
                 <th class="px-4 py-3">Case No</th>
                 <th class="px-4 py-3">Case Name</th>
-                <th class="px-4 py-3">P/R</th>
+                <!--th class="px-4 py-3">P/R</th-->
                 <th class="px-4 py-3">Stage</th>
                 <th class="px-4 py-3">Bench</th>
                 <th class="px-4 py-3">Court</th>
@@ -139,7 +139,7 @@
                   <td class="js-sl-no px-4 py-3"></td>
                   <td class="js-case-no px-4 py-3 whitespace-nowrap"></td>
                   <td class="js-parties px-4 py-3"></td>
-                  <td class="px-4 py-3">P/R</td>
+                  <!--td class="px-4 py-3">P/R</td-->
                   <td class="js-stage px-4 py-3"></td>
                   <td class="js-bench px-4 py-3"></td>
                   <td class="js-court px-4 py-3"></td>
@@ -151,10 +151,13 @@
         </div>
 
         <!-- MOBILE CAUSE LIST TILES -->
-        <div id="cause-list-cards" class="grid gap-4 px-4 md:hidden">
+        <div
+          id="cause-list-cards"
+          class="grid gap-4 px-2 md:hidden justify-items-center"
+        >
           <template id="card-template">
             <div
-              class="card-root relative max-w-85 bg-[#fffdf6] border border-[#d8cdb5] rounded-xl p-4 shadow-sm"
+              class="card-root relative w-90 bg-[#fffdf6] border border-[#d8cdb5] rounded-xl p-2 shadow-sm"
             >
               <div
                 class="absolute top-2 right-2 flex flex-col items-center justify-center bg-[#f4ecd8] border border-[#d8cdb5] rounded-lg px-2 py-1 min-w-11.25"
