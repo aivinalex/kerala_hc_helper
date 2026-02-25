@@ -4,14 +4,6 @@
   padding-bottom: 1rem;
 }
 
-@media (min-width: 768px) {
-  .search-active #search-section {
-    position: sticky;
-    top: 0;
-    z-index: 40;
-  }
-}
-
 .search-active #search-form {
   display: flex;
   align-items: center;

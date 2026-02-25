@@ -14,6 +14,7 @@ const selectors = {
   cardContainer: "#cause-list-cards",
   cardTemplate: "#card-template",
   tableRowTemplate: "#row-template",
+  loadingOverlay: "#loading-overlay",
 };
 
 export const nodesModule = Object.fromEntries(

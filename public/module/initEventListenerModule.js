@@ -1,4 +1,4 @@
-import { toggleErrorMessager } from "./helperModule.js";
+import { toggleErrorMessager, isLoading } from "./helperModule.js";
 import { advocateDetail } from "./advocateModule.js";
 import { nodesModule } from "./nodeModule.js";
 import {
@@ -79,8 +79,9 @@ export const initEventListeners = function () {
       return;
     }
     const date = searchDate.value;
-    console.log(advocateDetail.selectedAdvocates);
-    console.log(date);
+
+    isLoading(true);
+    //causelistContainer.classList.add("hidden");
 
     try {
       const data = await causeListSearch(
@@ -96,10 +97,12 @@ export const initEventListeners = function () {
         createCardMobile(mergedData);
 
         searchBody.classList.add("search-active");
-        causelistContainer.classList.remove("hidden");
+        //causelistContainer.classList.remove("hidden");
       }
     } catch (err) {
       console.log(err);
+    } finally {
+      isLoading(false);
     }
   });
 

@@ -1,8 +1,13 @@
 import { nodesModule } from "./nodeModule.js";
 
 let causeListController = null;
-const { tableBody, cardContainer, cardTemplate, tableRowTemplate } =
-  nodesModule;
+const {
+  tableBody,
+  cardContainer,
+  cardTemplate,
+  tableRowTemplate,
+  causelistContainer,
+} = nodesModule;
 
 export const causeListSearch = async function (date, selectedAdvocates) {
   const selectedArray = Array.from(selectedAdvocates, ([key, value]) => ({
@@ -69,7 +74,15 @@ export const caselistMerge = function (data) {
 };
 
 export const createTableDesktop = function (data) {
-  tableBody.innerHTML = " ";
+  tableBody.innerHTML = "";
+
+  /*if (data.causelist.length === 0) {
+    causelistContainer.classList.add("hidden");
+
+    return;
+  }
+
+  causelistContainer.classList.remove("hidden"); */
 
   data.causelist.forEach((element, i) => {
     const cloneRow = tableRowTemplate.content.cloneNode(true);
