@@ -81,7 +81,6 @@ export const initEventListeners = function () {
     const date = searchDate.value;
 
     isLoading(true);
-    //causelistContainer.classList.add("hidden");
 
     try {
       const data = await causeListSearch(
