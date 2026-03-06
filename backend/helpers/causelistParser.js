@@ -5,7 +5,6 @@ export const parseCauseList = function (data) {
   const caseDetail = [];
   $(" table tbody tr").each((_i, row) => {
     const col = $(row).find("td");
-    console.log(col);
     const itemNo = $(col[0]).find("strong").text().trim();
     const items = $(col[0])
       .clone()
@@ -40,6 +39,5 @@ export const parseCauseList = function (data) {
       parties,
     });
   });
-  console.log(caseDetail);
   return caseDetail;
 };

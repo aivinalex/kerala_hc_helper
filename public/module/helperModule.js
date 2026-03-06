@@ -1,7 +1,6 @@
 import { nodesModule } from "./nodeModule.js";
 
 export const debounce = function (passedFunction, delay) {
-  // first debounce created
   let timer;
 
   const debounced = function (...arg) {
@@ -14,6 +13,7 @@ export const debounce = function (passedFunction, delay) {
   debounced.cancel = () => clearTimeout(timer);
   return debounced;
 };
+
 export const toggleErrorMessager = function (input, errorElement, isError) {
   const errorClasses = ["ring-4", "ring-red-500/30", "border-red-500"];
   const normalClasses = ["border-[#c9b79c]"];
@@ -36,7 +36,6 @@ export function createElement(elementType, className = "", text = "") {
 
 export const isLoading = function (state) {
   const { loadingOverlay, causelistContainer } = nodesModule;
-  console.log(`spinny state  : ${state}`);
   loadingOverlay.classList.toggle("hidden", !state);
   causelistContainer.classList.toggle("hidden", state);
 };

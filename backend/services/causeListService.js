@@ -56,8 +56,6 @@ const delayedSearch = async function (searchParamsArray) {
 };
 
 export const causelistSearch = async function (advocates = [], date) {
-  console.log("reached causelist search");
-  console.log(advocates, date);
   if (!advocates.length) return [];
   const searchUrlArray = advocates.map((x) => ({
     advocate: x.name,
@@ -68,11 +66,7 @@ export const causelistSearch = async function (advocates = [], date) {
     }),
   }));
 
-  console.log(searchUrlArray);
-
   const res = await delayedSearch(searchUrlArray);
-
-  console.log(res);
 
   return res;
 };

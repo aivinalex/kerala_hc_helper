@@ -1,6 +1,7 @@
 import { nodesModule } from "./nodeModule.js";
 
 let causeListController = null;
+
 const { tableBody, cardContainer, cardTemplate, tableRowTemplate } =
   nodesModule;
 
@@ -83,9 +84,8 @@ export const createTableDesktop = function (data) {
 
     const itemCell = cloneRow.querySelector(".js-item");
     itemCell.textContent = `item ${element.itemNo}`;
-    itemCell.appendChild(document.createElement("br")); // Add the break
+    itemCell.appendChild(document.createElement("br"));
 
-    // Create a span for the sub-items to style them if needed
     const subItems = document.createElement("span");
     subItems.textContent = element.items || "";
     itemCell.appendChild(subItems);

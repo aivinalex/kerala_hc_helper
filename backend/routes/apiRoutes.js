@@ -1,34 +1,22 @@
 "use strict";
 import { advocateSearch } from "../services/AdvocateServices.js";
 import { causelistSearch } from "../services/causeListService.js";
+import { advocateSearchSchema } from "../schemas/advocateSchema.js";
 
 export async function advocateRoutes(fastify) {
-  const searchSchema = {
-    schema: {
-      query: {
-        type: "object",
-        required: ["name"], // This makes 'name' mandatory
-        properties: {
-          name: { type: "string", minLength: 3 },
-        },
-      },
-    },
-  };
-
-  fastify.get("/advocates", searchSchema, async (req, reply) => {
+  fastify.get("/advocates", advocateSearchSchema, async (req, reply) => {
     const { name } = req.query;
 
     try {
       const data = await advocateSearch(name);
       if (!data || data.length === 0) throw new Error("Advocate Not Found");
-
+      console.log(data);
       return {
         count: data.length,
         results: data,
       };
     } catch (err) {
-      console.log(err);
-      reply.code(502).send({
+      reply.code(404).send({
         success: false,
         message: "Advocate not found",
         code: "NO_ACCESS",
@@ -42,12 +30,9 @@ export const causeListRoute = async function (fastify) {
     try {
       const { advocates, date } = req.body;
 
-      console.log("reached  causelist route");
-
       const data = await causelistSearch(advocates, date);
       return { results: data };
     } catch (err) {
-      console.log(err);
       reply.code(502).send({
         success: false,
         message: "Causelist not found",

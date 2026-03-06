@@ -18,5 +18,6 @@ export const advocateSearch = async function (advocateName) {
   });
 
   const data = await res.json();
+
   return data;
 };
