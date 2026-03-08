@@ -1,9 +1,9 @@
-import fastify from "fastify";
+import Fastify from "fastify";
 import fastifyStatic from "@fastify/static";
 import path from "path";
 import { advocateRoutes, causeListRoute } from "./routes/apiRoutes.js";
 
-const app = fastify({ logger: true });
+const app = Fastify({ logger: true });
 
 app.register(fastifyStatic, {
   root: path.join(process.cwd(), "public"),
@@ -12,8 +12,12 @@ app.register(fastifyStatic, {
 app.register(advocateRoutes, { prefix: "/api" });
 app.register(causeListRoute, { prefix: "/api" });
 
-app.get("/home", async (request, reply) => {
-  return reply.sendFile("index.html");
+app.get("/status", async (request, reply) => {
+  return reply.send({
+    status: "ok",
+    uptime: process.uptime(),
+    timestamp: new Date().toISOString(),
+  });
 });
 
 try {

@@ -29,8 +29,10 @@ export const causeListRoute = async function (fastify) {
   fastify.post("/causelist", async (req, reply) => {
     try {
       const { advocates, date } = req.body;
+      console.log(advocates);
 
       const data = await causelistSearch(advocates, date);
+      console.log(data);
       return { results: data };
     } catch (err) {
       reply.code(502).send({

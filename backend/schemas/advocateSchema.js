@@ -1,4 +1,5 @@
 export const advocateSearchSchema = {
+  //query string scema implemenation
   schema: {
     querystring: {
       type: "object",
