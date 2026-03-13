@@ -1,11 +1,15 @@
 import { causelistSearch } from "../services/causeListService.js";
 
-export default async function causelistControler(req, reply) {
+// eslint-disable-next-line no-unused-vars
+export default async function causelistController(req, reply) {
   const { advocates, date } = req.body;
-  console.log(advocates);
+  if (advocates.length === 0)
+    throw req.server.httpErrors.badRequest("Advocate list empty");
+
+  if (!date) throw req.server.httpErrors.badRequest("Date missing");
 
   const data = await causelistSearch(advocates, date);
   if (data) {
     return { results: data };
-  } else throw new Error(" causelist not found");
+  } else throw req.server.httpErrors.notFound("failed in fetching causelist");
 }
