@@ -1,45 +1,12 @@
 "use strict";
-import { advocateSearch } from "../services/AdvocateServices.js";
-import { causelistSearch } from "../services/causeListService.js";
-import { advocateSearchSchema } from "../schemas/advocateSchema.js";
+import advocateSearchSchema from "../schemas/advocateSchema.js";
+import advocateController from "../controller/advocateController.js";
+import causelistControler from "../controller/causelistContoller.js";
 
 export async function advocateRoutes(fastify) {
-  fastify.get("/advocates", advocateSearchSchema, async (req, reply) => {
-    const { name } = req.query;
-
-    try {
-      const data = await advocateSearch(name);
-      if (!data || data.length === 0) throw new Error("Advocate Not Found");
-      console.log(data);
-      return {
-        count: data.length,
-        results: data,
-      };
-    } catch (err) {
-      reply.code(404).send({
-        success: false,
-        message: "Advocate not found",
-        code: "NO_ACCESS",
-      });
-    }
-  });
+  fastify.get("/advocates", advocateSearchSchema, advocateController);
 }
 
-export const causeListRoute = async function (fastify) {
-  fastify.post("/causelist", async (req, reply) => {
-    try {
-      const { advocates, date } = req.body;
-      console.log(advocates);
-
-      const data = await causelistSearch(advocates, date);
-      console.log(data);
-      return { results: data };
-    } catch (err) {
-      reply.code(502).send({
-        success: false,
-        message: "Causelist not found",
-        code: "NO_ACCESS",
-      });
-    }
-  });
-};
+export async function causeListRoute(fastify) {
+  fastify.post("/causelist", causelistControler);
+}

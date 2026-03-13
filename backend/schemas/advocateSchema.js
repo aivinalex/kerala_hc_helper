@@ -1,4 +1,4 @@
-export const advocateSearchSchema = {
+ const advocateSearchSchema = {
   //query string scema implemenation
   schema: {
     querystring: {
@@ -48,3 +48,4 @@ export const advocateSearchSchema = {
     },
   },
 };
+ export default advocateSearchSchema;
