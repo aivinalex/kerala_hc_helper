@@ -10,3 +10,12 @@ export async function advocateRoutes(fastify) {
 export async function causeListRoute(fastify) {
   fastify.post("/causelist", causelistControler);
 }
+export async function statusCheckRoute(fastify) {
+  fastify.get("/status", async (req, reply) => {
+    return reply.send({
+      status: "ok",
+      uptime: process.uptime(),
+      timestamp: new Date().toISOString(),
+    });
+  });
+}
