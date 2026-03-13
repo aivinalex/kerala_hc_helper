@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import Fastify from "fastify";
 import fastifyStatic from "@fastify/static";
 import path from "path";
