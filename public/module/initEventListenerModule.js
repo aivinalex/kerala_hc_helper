@@ -20,6 +20,15 @@ export const initEventListeners = function () {
     searchBody,
   } = nodesModule;
 
+  [searchData, searchDate].forEach((input) => {
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        searchButton.click();
+      }
+    });
+  });
+
   searchData.addEventListener("focus", () => {
     toggleErrorMessager(searchData, nameError, false);
   });
@@ -93,9 +102,5 @@ export const initEventListeners = function () {
     } finally {
       isLoading(false);
     }
-  });
-
-  searchData.addEventListener("focus", () => {
-    toggleErrorMessager(searchData, nameError, false);
   });
 };
