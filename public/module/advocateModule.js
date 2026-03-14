@@ -33,7 +33,7 @@ export const advocateDetail = {
       advocateSuggestionContainer.appendChild(newDev);
     }
   },
-  
+
   displaySuggestion: function (data) {
     this.clearSuggestion();
 
@@ -47,7 +47,7 @@ export const advocateDetail = {
       advocateSuggestionContainer.appendChild(newDev);
     });
   },
-  
+
   clearSuggestion: function () {
     advocateSuggestionContainer.innerHTML = "";
     this.advocateCache.clear();
@@ -60,7 +60,7 @@ export const advocateDetail = {
       const newPill = document.createElement("div");
       newPill.className =
         "flex items-center gap-2 px-3 py-1 bg-[#f4ecd8] border border-[#c9b79c] rounded-full text-sm text-[#5a4a33] shadow-sm animate-fadeIn";
-      
+
       const newSpan = document.createElement("span");
       newSpan.className = "font-medium";
       newSpan.textContent = element.label;
@@ -70,14 +70,16 @@ export const advocateDetail = {
         "remove-pill-btn hover:text-red-700 font-bold ml-1 cursor-pointer transition-colors";
       closeBtnCreate.textContent = "×";
       closeBtnCreate.dataset.keyval = element.keyval;
-      
+
       newPill.appendChild(newSpan);
       newPill.appendChild(closeBtnCreate);
       advocateSelectionContainer.appendChild(newPill);
+      console.log("reached here");
       this.clearSuggestion();
+      nodesModule.searchData.value = "";
     });
   },
-  
+
   pillRemove: function (e) {
     if (!e.target.classList.contains("remove-pill-btn")) return;
     const selectedRemoved = e.target.dataset.keyval;

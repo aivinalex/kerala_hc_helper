@@ -18,6 +18,8 @@ export const initEventListeners = function () {
     advocateSuggestionContainer,
     advocateSelectionContainer,
     searchBody,
+    loadingOverlay,
+    causelistContainer,
   } = nodesModule;
 
   [searchData, searchDate].forEach((input) => {
@@ -92,15 +94,20 @@ export const initEventListeners = function () {
 
       if (data.results?.length) {
         const mergedData = caselistMerge(data);
+        if (!mergedData.causelist.length) {
+          loadingOverlay.classList.add("hidden");
+          causelistContainer.classList.add("hidden");
+          throw new Error("No cases in causelist");
+          // to create a common error handle
+        }
+
         createTableDesktop(mergedData);
         createCardMobile(mergedData);
-
+        isLoading(false);
         searchBody.classList.add("search-active");
       }
     } catch (err) {
       console.error(err);
-    } finally {
-      isLoading(false);
     }
   });
 };

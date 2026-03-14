@@ -9,6 +9,7 @@ const selectors = {
   advocateSearchSection: "#search-section",
   advocateSearchForm: "#search-form",
   causelistContainer: "#cause-list-section",
+  causelistTable: "#causelist-table",
   searchBody: "#searchbody",
   tableBody: "#tablebody",
   cardContainer: "#cause-list-cards",
