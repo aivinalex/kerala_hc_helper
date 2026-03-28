@@ -7,7 +7,7 @@ import {
   createTableDesktop,
   createCardMobile,
 } from "./causelistModule.js";
-
+import { createMessage } from "./errorPromtModule.js";
 export const initEventListeners = function () {
   const {
     searchButton,
@@ -107,7 +107,11 @@ export const initEventListeners = function () {
         searchBody.classList.add("search-active");
       }
     } catch (err) {
-      console.error(err);
+      console.log(err);
+      createMessage({
+        message: err.message,
+        messageType: "error",
+      });
     }
   });
 };

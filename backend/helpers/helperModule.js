@@ -37,9 +37,10 @@ export const getCourtFetch = async () => {
 };
 
 export const encode = (data) =>
+  // eslint-disable-next-line no-undef
   Buffer.from(encodeURIComponent(data)).toString("base64");
 
 export const randomDelayed = (...args) =>
   new Promise((resolve) =>
-    setTimeout(() => resolve(args), Math.random() * 1000)
+    setTimeout(() => resolve(args), Math.random() * 1000),
   );
