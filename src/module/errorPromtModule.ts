@@ -4,7 +4,7 @@ interface MessageOption {
   message: string;
   title?: string;
   messageType: MessageType;
-  isTimer: boolean;
+  isTimer?: number;
 }
 type Style = {
   border: string;
@@ -35,7 +35,7 @@ export const createMessage = function ({
   message,
   messageType,
   title,
-  isTimer = false,
+  isTimer,
 }: MessageOption): MessageReturn {
   const messageStyle = typeStyles[messageType];
 
@@ -65,7 +65,7 @@ export const createMessage = function ({
 
     document.removeEventListener("keydown", escapeKey);
     overlay.removeEventListener("click", onOverlayClick);
-    closeButton.removeEventListener("click", onCloseClick);
+    closeButton.removeEventListener("click", closeBox);
   };
   const escapeKey = function (e: KeyboardEvent): void {
     if (e.key === "Escape") closeBox();
@@ -74,16 +74,13 @@ export const createMessage = function ({
   const onOverlayClick = function (e: MouseEvent): void {
     if (e.target === overlay) closeBox();
   };
-  const onCloseClick = function (e: MouseEvent) {
-    if (e.target === closeButton) closeBox();
-  };
 
   document.addEventListener("keydown", escapeKey);
   overlay.addEventListener("click", onOverlayClick);
-  closeButton.addEventListener("click", onCloseClick);
+  closeButton.addEventListener("click", closeBox);
 
   if (isTimer) {
-    setTimeout(closeBox, 3000);
+    setTimeout(closeBox, isTimer);
   }
 
   return { closeBox };
