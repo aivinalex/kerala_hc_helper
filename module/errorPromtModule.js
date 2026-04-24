@@ -1,33 +1,36 @@
 const typeStyles = {
     error: {
-        border: "border-red-200/50",
-        text: "text-red-600",
+        border: "border-red-300",
+        text: "text-red-700",
     },
     success: {
-        border: "border-emerald-200/50",
-        text: "text-emerald-700",
+        border: "border-green-300",
+        text: "text-green-700",
     },
     warning: {
-        border: "border-amber-200/50",
-        text: "text-amber-700",
+        border: "border-yellow-300",
+        text: "text-yellow-700",
     },
 };
 export const createMessage = function ({ message, messageType, title, isTimer, }) {
     const messageStyle = typeStyles[messageType];
     const overlay = document.createElement("div");
-    overlay.className = ` fixed inset-0 flex items-center justify-center bg-stone-900/10 backdrop-blur-[2px] z-[100] transition-opacity duration-300
+    overlay.className = `
+    fixed inset-0 flex items-center justify-center
+    bg-black/20 backdrop-blur-sm z-50
   `;
     const box = document.createElement("div");
-    box.className = ` bg-[#fffdf6] border-4 ${messageStyle.border}  rounded-xl shadow-2xl shadow-stone-200/50  ring-1 ring-black/5  p-8 max-w-sm w-[90%] flex flex-col items-center animate-in fade-in zoom-in duration-200 relative`;
+    box.className = `relative bg-[#fffdf6] border ${messageStyle.border} rounded-2xl shadow-lg px-6 py-5  max-w-md w-[90%] flex flex-col  h-48
+  `;
     const boxTitle = document.createElement("h2");
     boxTitle.textContent = title ?? messageType.toUpperCase();
-    boxTitle.className = ` text-[10px] uppercase tracking-[0.2em] font-black mb-4${messageStyle.text}`;
+    boxTitle.className = `font-semibold text-lg justify-center text-center ${messageStyle.text}`;
     const messageEl = document.createElement("p");
     messageEl.textContent = message;
-    messageEl.className = ` text-stone-800 text-sm leading-relaxed text-center font-medium `;
+    messageEl.className = `flex-1 flex items-center justify-center text-[#3b2f2a] text-sm text-center`;
     const closeButton = document.createElement("button");
     closeButton.textContent = "✕";
-    closeButton.className = ` absolute top-4 right-4  z-[110] text-stone-500 hover:text-stone-900 text-lg font-bold transition-all duration-200  cursor-pointer p-2   leading-none`;
+    closeButton.className = ` absolute top-3 right-3 text-[#8b6f47] hover:text-[#3b2f2a]`;
     box.append(closeButton, boxTitle, messageEl);
     overlay.appendChild(box);
     document.body.appendChild(overlay);

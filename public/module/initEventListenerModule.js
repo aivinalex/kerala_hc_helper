@@ -3,7 +3,6 @@ import { advocateDetail } from "./advocateModule.js";
 import { nodesModule } from "./nodeModule.js";
 import {
   causeListSearch,
-  caselistMerge,
   createTableDesktop,
   createCardMobile,
 } from "./causelistModule.js";
@@ -18,7 +17,6 @@ export const initEventListeners = function () {
     advocateSuggestionContainer,
     advocateSelectionContainer,
     searchBody,
-    loadingOverlay,
     causelistContainer,
   } = nodesModule;
 
@@ -85,32 +83,32 @@ export const initEventListeners = function () {
     const date = searchDate.value;
 
     isLoading(true);
+    causelistContainer.classList.add("hidden");
 
     try {
       const data = await causeListSearch(
         date,
         advocateDetail.selectedAdvocates,
       );
+      const results = data.results;
+      console.log(results);
 
-      if (data.results?.length) {
-        const mergedData = caselistMerge(data);
-        if (!mergedData.causelist.length) {
-          loadingOverlay.classList.add("hidden");
-          causelistContainer.classList.add("hidden");
-          throw new Error("No cases in causelist");
-          // to create a common error handle
-        }
-
-        createTableDesktop(mergedData);
-        createCardMobile(mergedData);
+      if (results.causelist?.length) {
+        createTableDesktop(results);
+        createCardMobile(results);
         isLoading(false);
         searchBody.classList.add("search-active");
+      } else {
+        throw new Error("No cases found in cause list");
       }
     } catch (err) {
       console.log(err);
+      isLoading(false);
+      causelistContainer.classList.add("hidden");
+
       createMessage({
         message: err.message,
-        messageType: "error",
+        messageType: "warning",
       });
     }
   });

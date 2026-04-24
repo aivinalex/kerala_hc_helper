@@ -16,11 +16,17 @@ const selectors = {
   cardTemplate: "#card-template",
   tableRowTemplate: "#row-template",
   loadingOverlay: "#loading-overlay",
+  downloadPdf: "#pdf-download",
 };
 
 export const nodesModule = Object.fromEntries(
-  Object.entries(selectors).map(([key, value]) => [
-    key,
-    document.querySelector(value),
-  ]),
+  Object.entries(selectors).map(([key, value]) => {
+    const el = document.querySelector(value);
+
+    if (!el) {
+      console.warn(`Missing element: ${value}`);
+    }
+
+    return [key, el];
+  }),
 );

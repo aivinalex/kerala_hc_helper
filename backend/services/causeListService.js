@@ -7,6 +7,7 @@ import {
   encode,
 } from "../helpers/helperModule.js";
 import { parseCauseList } from "../helpers/causelistParser.js";
+import { mergedcauselist } from "../helpers/causelistmerge.js";
 
 const SEARCH_URL = `${BASE_URL}/Casedetailssearch/Casebyadv1`;
 
@@ -66,7 +67,8 @@ export const causelistSearch = async function (advocates = [], date) {
     }),
   }));
 
-  const res = await delayedSearch(searchUrlArray);
+  const unsortedRes = await delayedSearch(searchUrlArray);
+  const res = mergedcauselist(unsortedRes)
 
   return res;
 };

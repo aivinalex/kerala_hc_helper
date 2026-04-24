@@ -26,7 +26,8 @@ export const causeListSearch = async function (date, selectedAdvocates) {
     });
 
     if (!result.ok) {
-      throw new Error(`HTTP error! status: ${result.status}`);
+      const errData = await result.json();
+      throw new Error(errData.message ?? `HTTP error! status: ${result.status}`);
     }
 
     const data = await result.json();
