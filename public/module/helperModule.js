@@ -39,3 +39,9 @@ export const isLoading = function (state) {
   loadingOverlay.classList.toggle("hidden", !state);
   causelistContainer.classList.toggle("hidden", state);
 };
+
+export const buttonId = function (id) {
+  const{ downloadPdf} = nodesModule
+  downloadPdf.setAttribute("data-id", id);
+  console.log(`id ${id} set`);
+};

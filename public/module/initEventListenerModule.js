@@ -1,4 +1,4 @@
-import { toggleErrorMessager, isLoading } from "./helperModule.js";
+import { toggleErrorMessager, isLoading, buttonId } from "./helperModule.js";
 import { advocateDetail } from "./advocateModule.js";
 import { nodesModule } from "./nodeModule.js";
 import {
@@ -7,6 +7,7 @@ import {
   createCardMobile,
 } from "./causelistModule.js";
 import { createMessage } from "./errorPromtModule.js";
+
 export const initEventListeners = function () {
   const {
     searchButton,
@@ -18,6 +19,7 @@ export const initEventListeners = function () {
     advocateSelectionContainer,
     searchBody,
     causelistContainer,
+    downloadPdf,
   } = nodesModule;
 
   [searchData, searchDate].forEach((input) => {
@@ -90,13 +92,16 @@ export const initEventListeners = function () {
         date,
         advocateDetail.selectedAdvocates,
       );
-      const results = data.results;
-      console.log(results);
 
-      if (results.causelist?.length) {
-        createTableDesktop(results);
-        createCardMobile(results);
+      const { response, id } = data;
+
+      if (response.causelist?.length) {
+        //
+        createTableDesktop(response);
+        createCardMobile(response);
         isLoading(false);
+        buttonId(id);
+        // add butoton id and linkfunction
         searchBody.classList.add("search-active");
       } else {
         throw new Error("No cases found in cause list");
@@ -109,6 +114,47 @@ export const initEventListeners = function () {
       createMessage({
         message: err.message,
         messageType: "warning",
+        title:""
+      });
+    }
+  });
+  downloadPdf.addEventListener("click", async (e) => {
+    const id = e.target.closest("[data-id]")?.dataset.id;
+
+    try {
+      const res = await fetch(`download/pdf/${id}`);
+
+      if (!res.ok) {
+        let message = "Download failed";
+
+        try {
+          const data = await res.json();
+          message = data.message || message;
+        } catch {
+          const text = await res.text();
+          message = text || message;
+        }
+
+        throw new Error(message);
+      }
+
+      const blob = await res.blob();
+      const disposition = res.headers.get("Content-Disposition");
+      const fileName =
+        disposition?.split("filename=")[1]?.replace(/"/g, "") ||
+        "causelist.pdf";
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = fileName;
+      a.click();
+      window.URL.revokeObjectURL(url);
+    } catch (err) {
+      console.log(err);
+      createMessage({
+        message: err.message,
+        messageType: "error",
+        title: "",
       });
     }
   });

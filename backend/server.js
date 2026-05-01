@@ -1,6 +1,8 @@
 import buildApp from "./app.js";
+import { cleanupCron } from "./cronJobs/caselistCacheRemoveCron.js";
 
 const app = buildApp();
+cleanupCron(app.fileStore);
 
 const startServer = async function () {
   try {

@@ -5,6 +5,7 @@ import path from "path";
 import {
   advocateRoutes,
   causeListRoute,
+  downloadRoute,
   statusCheckRoute,
 } from "./routes/apiRoutes.js";
 import sensible from "@fastify/sensible";
@@ -13,6 +14,7 @@ import errorHandler from "./helpers/errorHandler.js";
 export default function buildApp() {
   const app = Fastify({ logger: true });
 
+  app.decorate("fileStore", new Map());
   app.register(sensible);
   app.register(fastifyStatic, {
     root: path.join(process.cwd(), "public"),
@@ -21,6 +23,7 @@ export default function buildApp() {
   app.register(advocateRoutes, { prefix: "/api" });
   app.register(causeListRoute, { prefix: "/api" });
   app.register(statusCheckRoute);
+  app.register(downloadRoute, { prefix: "/download" });
 
   app.setErrorHandler(errorHandler);
 

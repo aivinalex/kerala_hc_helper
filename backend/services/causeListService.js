@@ -8,6 +8,7 @@ import {
 } from "../helpers/helperModule.js";
 import { parseCauseList } from "../helpers/causelistParser.js";
 import { mergedcauselist } from "../helpers/causelistmerge.js";
+import { cachecCauselistData } from "../helpers/cacheCauslelist.js";
 
 const SEARCH_URL = `${BASE_URL}/Casedetailssearch/Casebyadv1`;
 
@@ -56,7 +57,11 @@ const delayedSearch = async function (searchParamsArray) {
   return results;
 };
 
-export const causelistSearch = async function (advocates = [], date) {
+export const causelistSearch = async function (
+  advocates = [],
+  date,
+  fileStore,
+) {
   if (!advocates.length) return [];
   const searchUrlArray = advocates.map((x) => ({
     advocate: x.name,
@@ -68,7 +73,12 @@ export const causelistSearch = async function (advocates = [], date) {
   }));
 
   const unsortedRes = await delayedSearch(searchUrlArray);
-  const res = mergedcauselist(unsortedRes)
+  const res = mergedcauselist(unsortedRes);
+  const id = cachecCauselistData(res, fileStore);
+  console.log("reache cache");
 
-  return res;
+  return {
+    id: id,
+    response: res,
+  };
 };

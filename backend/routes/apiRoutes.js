@@ -2,16 +2,17 @@
 import advocateSearchSchema from "../schemas/advocateSchema.js";
 import advocateController from "../controller/advocateController.js";
 import causelistController from "../controller/causelistContoller.js";
+import { downloadPdf } from "../controller/downloadController.js";
 
-export async function advocateRoutes(fastify) {
-  fastify.get("/advocates", advocateSearchSchema, advocateController);
+export async function advocateRoutes(app) {
+  app.get("/advocates", advocateSearchSchema, advocateController);
 }
 
-export async function causeListRoute(fastify) {
-  fastify.post("/causelist", causelistController);
+export async function causeListRoute(app) {
+  app.post("/causelist", causelistController);
 }
-export async function statusCheckRoute(fastify) {
-  fastify.get("/status", async (req, reply) => {
+export async function statusCheckRoute(app) {
+  app.get("/status", async (req, reply) => {
     return reply.send({
       status: "ok",
       // eslint-disable-next-line no-undef
@@ -19,4 +20,7 @@ export async function statusCheckRoute(fastify) {
       timestamp: new Date().toISOString(),
     });
   });
+}
+export async function downloadRoute(app) {
+  app.get("/pdf/:id", downloadPdf);
 }

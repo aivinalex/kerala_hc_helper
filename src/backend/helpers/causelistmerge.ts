@@ -1,25 +1,9 @@
-interface AdvocateEntry {
-  advocate: string;
-  caselist: ListItem[] | null;
-  success: boolean;
-}
 
-interface ListItem {
-  itemNo: string;
-  items: string;
-  courtHall: string;
-  benchName: string;
-  list: string;
-  caseNo: string;
-  parties: string;
-}
+import { AdvocateCaseList } from "../../types/appTypes.js";
 
-type CauseList = AdvocateEntry[];
+import { Response } from "../../types/appTypes.js";
 
-interface Response {
-  causelist: ListItem[];
-  noListAdvocate: string[];
-}
+type CauseList = AdvocateCaseList[];
 
 export const mergedcauselist = function (data: CauseList): Response {
   {
