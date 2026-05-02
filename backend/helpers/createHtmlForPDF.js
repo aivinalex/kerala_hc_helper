@@ -1,6 +1,6 @@
 export function createHtml(data) {
-  const rows = rowCreate(data);
-  const html = ` <html>
+    const rows = rowCreate(data);
+    const html = ` <html>
       <head>
         <style>
     body {
@@ -59,12 +59,12 @@ export function createHtml(data) {
         </table>
       </body>
     </html>`;
-  return html;
+    return html;
 }
 const rowCreate = function (data) {
-  const rows = data.causelist
-    .map((el, i) => {
-      return `<tr>
+    const rows = data.causelist
+        .map((el, i) => {
+        return `<tr>
       <td>${i + 1}</td>
       <td style="white-space: nowrap;">${el.caseNo}</td>
       <td>${el.parties}</td>
@@ -77,6 +77,6 @@ const rowCreate = function (data) {
       </td>
     </tr>`;
     })
-    .join("");
-  return rows;
+        .join("");
+    return rows;
 };
