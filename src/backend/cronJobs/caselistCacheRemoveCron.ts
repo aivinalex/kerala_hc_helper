@@ -14,10 +14,8 @@ const cleanUpFactory: CleanupFactory = function (fileStore: FileStore) {
     const currentTime = Date.now();
 
     for (const [id, data] of fileStore) {
-      console.log("Cron job ");
       if (currentTime > data.expireTime) {
         fileStore.delete(id);
-        console.log(` data with ${id} deleted`);
       }
     }
   };

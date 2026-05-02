@@ -6,7 +6,7 @@ cleanupCron(app.fileStore);
 
 const startServer = async function () {
   try {
-    await app.listen({ port: 3000, host: "0.0.0.0" });
+    await app.listen({ port: process.env.PORT ?? 3000, host: "0.0.0.0" });
     app.log.info("Server running at port 3000");
   } catch (err) {
     app.log.error(err);

@@ -12,7 +12,9 @@ import sensible from "@fastify/sensible";
 import errorHandler from "./helpers/errorHandler.js";
 
 export default function buildApp() {
-  const app = Fastify({ logger: true });
+  const app = Fastify({
+    logger: process.env.NODE_ENV === "production" ? "warn" : "info",
+  });
 
   app.decorate("fileStore", new Map());
   app.register(sensible);
