@@ -5,8 +5,10 @@ export default async function advocateController(req, reply) {
   const { name } = req.query;
 
   const data = await advocateSearch(name);
-  if (!data || data.length === 0)
+  if (!data?.length) {
     throw req.server.httpErrors.notFound("Advocate not found");
+  }
+
   return {
     count: data.length,
     results: data,
