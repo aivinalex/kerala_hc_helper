@@ -19,7 +19,6 @@ export const advocateSearch = async function (advocateName) {
 
   const data = await res.json();
   const response = data.slice(0, 20);
-  console.log(response);
 
   return response;
 };
