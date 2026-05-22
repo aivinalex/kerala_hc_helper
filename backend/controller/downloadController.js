@@ -1,4 +1,4 @@
-import { createPDF } from "../services/downloadService.js";
+import { createPDFv2 } from "../services/pdfMakeService.js";
 export async function downloadPdf(req, reply) {
     const id = req.params.id;
     const file = req.server.fileStore.get(id);
@@ -8,7 +8,7 @@ export async function downloadPdf(req, reply) {
     if (!file.data.causelist)
         throw req.server.httpErrors.notFound("Session expired. Please search again.");
     try {
-        const pdf = await createPDF(file.data);
+        const pdf = await createPDFv2(file.data);
         reply
             .type("application/pdf")
             .header("Content-Disposition", `attachment; filename=${id}.pdf`)

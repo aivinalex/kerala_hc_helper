@@ -3,7 +3,8 @@ type Params = {
   id: string;
 };
 import { CauselistCache } from "../../types/appTypes.js";
-import { createPDF } from "../services/downloadService.js";
+
+import { createPDFv2 } from "../services/pdfMakeService.js";
 
 export async function downloadPdf(
   req: FastifyRequest<{ Params: Params }>,
@@ -24,7 +25,7 @@ export async function downloadPdf(
     );
 
   try {
-    const pdf = await createPDF(file.data);
+    const pdf = await createPDFv2(file.data);
 
     reply
       .type("application/pdf")
