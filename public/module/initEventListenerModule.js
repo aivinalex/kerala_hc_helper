@@ -103,6 +103,8 @@ export const initEventListeners = function () {
         createTableDesktop(response);
         createCardMobile(response);
         isLoading(false);
+        banner.classList.remove("hidden");
+
         buttonId(id);
         // add butoton id and linkfunction
         searchBody.classList.add("search-active");
