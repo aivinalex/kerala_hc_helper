@@ -26,7 +26,10 @@ export const parseCauseList = function (data) {
         .trim(),
     );
 
-    const list = $(col[3]).text().trim();
+    const listRaw = $(col[3]).text().trim();
+    const list = listRaw.toUpperCase().includes("COURT")
+      ? "Unavailable"
+      : listRaw;
     const caseNo = $(col[4]).text().trim();
     const partiesraw = $(col[5]).text().trim();
     const parties = toTitleCase(

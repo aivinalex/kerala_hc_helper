@@ -21,6 +21,8 @@ export const initEventListeners = function () {
     causelistContainer,
     downloadPdf,
     downloadWord,
+    closeBannerBtn,
+    banner,
   } = nodesModule;
 
   [searchData, searchDate].forEach((input) => {
@@ -209,5 +211,8 @@ export const initEventListeners = function () {
         title: "",
       });
     }
+  });
+  closeBannerBtn.addEventListener("click", () => {
+    banner.classList.add("hidden");
   });
 };

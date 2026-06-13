@@ -18,6 +18,8 @@ const selectors = {
   loadingOverlay: "#loading-overlay",
   downloadPdf: "#pdf-download",
   downloadWord: "#word-download",
+  closeBannerBtn: "#close-banner-btn",
+  banner: "#stage-warning-banner",
 };
 
 export const nodesModule = Object.fromEntries(
